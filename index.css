@@ -1,0 +1,61 @@
+body {
+    background: linear-gradient(to right, #004280, #026ad2);
+    background-image: url(vu.jpg); 
+    background-size: cover; 
+    display: flex;
+    z-index: -1000;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px; 
+    height: 100px;
+    background-image: url(logo.png);
+    background-size: cover;
+    z-index: -1001;
+}
+
+form {
+    background: linear-gradient(to left , #398ede, #000dff);
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: darkgreen;
+}
+
+.error-message {
+    color: red;
+    margin-top: -12px;
+    margin-bottom: 12px;
+}

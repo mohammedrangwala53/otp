@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vishwakarma University Login Portal</title>
+    <style>
+      body {
+        display: flex;
+        height: 100vh;
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        overflow: hidden;
+        background: linear-gradient(to bottom left, #b35959, #1a1a1a, #b90c0c);
+      }
+
+      #video-bg {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -1;
+      }
+
+      .container {
+        text-align: center;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+        margin-left: auto;
+      }
+
+      #left-image {
+        width: 300px;
+        height: 203px;
+        margin-right: 20px;
+        position: absolute;
+        bottom: 290px;
+        left: 50px;
+      }
+
+      h1 {
+        color: #fff;
+        font-size: 36px;
+        letter-spacing: 2px;
+      }
+
+      label {
+        display: block;
+        margin-top: 10px;
+        color: #ecf0f1;
+        font-size: 15px;
+      }
+
+      input {
+        width: 100%;
+        padding: 9px;
+        margin: 9px 0;
+        box-sizing: border-box;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        font-size: 15px;
+        background-color: transparent;
+        color: #fff;
+      }
+
+      button {
+        background-color: #b90c0c;
+        color: #fff;
+        padding: 20px 40px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 24px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        position: relative;
+        z-index: 1;
+      }
+
+      button:hover {
+        background-color: #8c0b0b;
+        transform: translateX(20px);
+      }
+
+      #emailForm {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+    </style>
+  </head>
+  <body>
+    <video autoplay muted loop id="video-bg">
+      <source src="public/HI tech screen 8 hours. loop.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <div class="overlay"></div>
+
+    <img src="public/logo.png" alt="Left Image" id="left-image" />
+
+    <div class="container">
+      <h1>Vishwakarma University Login Portal</h1>
+      <form id="emailForm">
+        <label for="userid">User ID:</label>
+        <input type="text" id="userid" name="userid" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+
+        <label for="recipientEmail">Email:</label>
+        <input
+          type="email"
+          id="recipientEmail"
+          name="recipientEmail"
+          required
+        />
+
+        <button type="submit">Send Email</button>
+      </form>
+    </div>
+
+    <!-- Repeat the same structure for other dialogue boxes -->
+
+    <script>
+      document
+        .getElementById("emailForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const predefinedUserId = "mohammed";
+          const predefinedPassword = "password";
+
+          const userid = document.getElementById("userid").value;
+          const password = document.getElementById("password").value;
+          const recipientEmail =
+            document.getElementById("recipientEmail").value;
+
+          if (userid !== predefinedUserId || password !== predefinedPassword) {
+            alert("Invalid credentials");
+            return;
+          }
+
+          fetch("/send-email", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userid, password, recipientEmail }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              alert(data.message);
+              window.location.href = "otp.html";
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert("An error occurred while sending the email.");
+            });
+        });
+    </script>
+  </body>
+</html>
